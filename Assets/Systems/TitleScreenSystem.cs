@@ -118,6 +118,7 @@ public class TitleScreenSystem : FSystem {
 			GameObjectManager.setGameObjectState(directory, true);
 			//hide level buttons
 			foreach (GameObject level in levelButtons[directory]) {
+				Debug.Log(level);
 				GameObjectManager.setGameObjectState(level, false);
 			}
 		}
