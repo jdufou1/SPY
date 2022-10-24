@@ -5,6 +5,7 @@ public class TitleScreenSystem_wrapper : BaseWrapper
 {
 	public GameData prefabGameData;
 	public UnityEngine.GameObject mainMenu;
+	public UnityEngine.GameObject coin;
 	public UnityEngine.GameObject campagneMenu;
 	public UnityEngine.GameObject compLevelButton;
 	public UnityEngine.GameObject cList;
@@ -15,6 +16,7 @@ public class TitleScreenSystem_wrapper : BaseWrapper
 		this.hideFlags = HideFlags.NotEditable;
 		MainLoop.initAppropriateSystemField (system, "prefabGameData", prefabGameData);
 		MainLoop.initAppropriateSystemField (system, "mainMenu", mainMenu);
+		MainLoop.initAppropriateSystemField (system, "coin", coin);
 		MainLoop.initAppropriateSystemField (system, "campagneMenu", campagneMenu);
 		MainLoop.initAppropriateSystemField (system, "compLevelButton", compLevelButton);
 		MainLoop.initAppropriateSystemField (system, "cList", cList);

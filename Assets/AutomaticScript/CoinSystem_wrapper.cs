@@ -1,17 +1,16 @@
 using UnityEngine;
 using FYFY;
 
-[ExecuteInEditMode]
-public class CoinSystem_wrapper : MonoBehaviour
+public class CoinSystem_wrapper : BaseWrapper
 {
 	private void Start()
 	{
-		this.hideFlags = HideFlags.HideInInspector; // Hide this component in Inspector
+		this.hideFlags = HideFlags.NotEditable;
 	}
 
-	public void detectCollision(System.Boolean on)
+	public void update_coin_panel()
 	{
-		MainLoop.callAppropriateSystemMethod (null, "detectCollision", on);
+		MainLoop.callAppropriateSystemMethod (system, "update_coin_panel", null);
 	}
 
 }

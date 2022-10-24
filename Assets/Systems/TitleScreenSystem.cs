@@ -14,6 +14,9 @@ public class TitleScreenSystem : FSystem {
 	private GameData gameData;
 	public GameData prefabGameData;
 	public GameObject mainMenu;
+
+	public GameObject coin;
+
 	public GameObject campagneMenu;
 	public GameObject compLevelButton;
 	public GameObject cList;
@@ -111,6 +114,7 @@ public class TitleScreenSystem : FSystem {
 
 	// See Jouer button in editor
 	public void showCampagneMenu() {
+
 		GameObjectManager.setGameObjectState(campagneMenu, true);
 		GameObjectManager.setGameObjectState(mainMenu, false);
 		foreach (GameObject directory in levelButtons.Keys) {
