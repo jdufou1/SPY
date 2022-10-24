@@ -1,9 +1,16 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using FYFY;
 
+using TMPro;
+using UnityEngine.Events;
+using UnityEngine.EventSystems;
+
 
 public class CoinSystem : FSystem {
+
+	private Family f_coinDisplay = FamilyManager.getFamily(new AllOfComponents(typeof(CoinDisplay)));
 
 	public static CoinSystem instance;
 
@@ -34,15 +41,22 @@ public class CoinSystem : FSystem {
 	// Use to update member variables when system resume.
 	// Advice: avoid to update your families inside this function.
 	protected override void onResume(int currentFrame){
+		
 	}
 
 	// Use to process your families.
 	protected override void onProcess(int familiesUpdateCount) {
-		this.coin_player++;
-		// Debug.Log("salut onprocess"+val);
+		//this.coin_player++;
+		
+		GameObject text_field = f_coinDisplay.First(); // acces au premier game object
+
+		TextMeshProUGUI text = text_field.GetComponent<TextMeshProUGUI>(); // acces au component text
+
+		text.text = "Jeton du joueur : "+this.coin_player; // modification du text
+
 	}
 
-	public void update_coin_panel(){
+	public void update_coin_panel(GameObject go){
 		// TODO
 	}
 

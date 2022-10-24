@@ -21,6 +21,14 @@ public class EndGameManager : FSystem {
 	
 	private GameData gameData;
 
+	/*
+		-- Ajout Projet
+	*/
+	public CoinSystem coin_system;
+	/*
+		-- Ajout Projet
+	*/
+
 	public GameObject playButtonAmount;
 	public GameObject endPanel;
 
@@ -219,6 +227,10 @@ public class EndGameManager : FSystem {
 		int savedScore = PlayerPrefs.GetInt(gameData.levelToLoad.Item1 + Path.DirectorySeparatorChar + gameData.levelToLoad.Item2 + gameData.scoreKey, 0);
 		if (savedScore < scoredStars)
 		{
+			Debug.Log(coin_system.get_coin_player());
+
+
+			// coin_player += savedScore; TODO
 			PlayerPrefs.SetInt(gameData.levelToLoad.Item1 + Path.DirectorySeparatorChar + gameData.levelToLoad.Item2 + gameData.scoreKey, scoredStars);
 			PlayerPrefs.Save();
 		}

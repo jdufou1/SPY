@@ -8,9 +8,9 @@ public class CoinSystem_wrapper : BaseWrapper
 		this.hideFlags = HideFlags.NotEditable;
 	}
 
-	public void update_coin_panel()
+	public void update_coin_panel(UnityEngine.GameObject go)
 	{
-		MainLoop.callAppropriateSystemMethod (system, "update_coin_panel", null);
+		MainLoop.callAppropriateSystemMethod (system, "update_coin_panel", go);
 	}
 
 }
