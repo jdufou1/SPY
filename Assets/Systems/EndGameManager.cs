@@ -24,7 +24,7 @@ public class EndGameManager : FSystem {
 	/*
 		-- Ajout Projet
 	*/
-	public CoinSystem coin_system;
+	public CoinSystem coin_system = new CoinSystem();
 	/*
 		-- Ajout Projet
 	*/
@@ -212,6 +212,7 @@ public class EndGameManager : FSystem {
 			{
 				scoredStars = 1;
 			}
+			
 		}
 
 		// Affiche le nombre d'étoile désiré
@@ -227,10 +228,8 @@ public class EndGameManager : FSystem {
 		int savedScore = PlayerPrefs.GetInt(gameData.levelToLoad.Item1 + Path.DirectorySeparatorChar + gameData.levelToLoad.Item2 + gameData.scoreKey, 0);
 		if (savedScore < scoredStars)
 		{
-			Debug.Log(coin_system.get_coin_player());
-
-
-			// coin_player += savedScore; TODO
+			this.coin_system.add_coin_player(scoredStars*10);
+			Debug.Log("Add coins : "+(scoredStars-savedScore)*10);
 			PlayerPrefs.SetInt(gameData.levelToLoad.Item1 + Path.DirectorySeparatorChar + gameData.levelToLoad.Item2 + gameData.scoreKey, scoredStars);
 			PlayerPrefs.Save();
 		}

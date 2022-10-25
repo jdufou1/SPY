@@ -1,3 +1,6 @@
+using System;
+using System.IO;
+
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
@@ -16,14 +19,26 @@ public class CoinSystem : FSystem {
 
 	private int coin_player;
 
-	private string path_coin_player = "./jenaiaucuneidee.csv";
+	private string path_coin_player = "jenaiaucuneidee.txt";
 
 	public CoinSystem()
 	{
 		instance = this;
 		this.coin_player = 0;
-
-		// TODO : Chargement des données utilisateur coin
+		Debug.Log(this.path_coin_player);
+		// TODO : Chargement des donnÃ©es utilisateur coin
+		
+		if(File.Exists(this.path_coin_player)){
+			string text = File.ReadAllText(this.path_coin_player);
+			Debug.Log("file contain : "+text);
+			if(text != ""){
+				this.coin_player = unchecked((int)Int64.Parse(text));  
+				Debug.Log("Loaded coins : "+this.coin_player);  
+			}
+		}else{
+			File.CreateText(this.path_coin_player);
+			Debug.Log("create file - "+this.path_coin_player);  
+		}
 	}
 	
 	// Use to init system before the first onProcess call
@@ -52,7 +67,7 @@ public class CoinSystem : FSystem {
 
 		TextMeshProUGUI text = text_field.GetComponent<TextMeshProUGUI>(); // acces au component text
 
-		text.text = "Jeton du joueur : "+this.coin_player; // modification du text
+		text.text = "Jeton du joueur : " + this.coin_player; // modification du text
 
 	}
 
@@ -61,6 +76,18 @@ public class CoinSystem : FSystem {
 	}
 
 	public int get_coin_player(){
+		return this.coin_player;
+	}
+
+	public int add_coin_player(int coins){
+		this.coin_player += coins;
+		Debug.Log("NOW : "+this.coin_player);
+		File.WriteAllText(this.path_coin_player,string.Empty);
+		using(StreamWriter sw = File.AppendText(this.path_coin_player))
+		{
+			sw.WriteLine(this.coin_player.ToString());
+			Debug.Log("SAVE COINS");    
+		}
 		return this.coin_player;
 	}
 }
