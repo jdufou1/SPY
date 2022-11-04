@@ -228,7 +228,12 @@ public class EndGameManager : FSystem {
 		int savedScore = PlayerPrefs.GetInt(gameData.levelToLoad.Item1 + Path.DirectorySeparatorChar + gameData.levelToLoad.Item2 + gameData.scoreKey, 0);
 		if (savedScore < scoredStars)
 		{
-			int coins = PlayerPrefs.GetInt("playerCoins", 0);
+
+			int current_coins_player = read_current_player_coins();
+			int new_value_coins = current_coins_player + ((scoredStars - savedScore)*10);
+			write_current_player_coins(new_value_coins);
+
+			int coins = new_value_coins; // PlayerPrefs.GetInt("playerCoins", 0);
 			Debug.Log("Player coins : " + coins);
 			PlayerPrefs.SetInt("playerCoins", coins+(scoredStars - savedScore)*10);
 			PlayerPrefs.Save();
@@ -254,5 +259,30 @@ public class EndGameManager : FSystem {
 		yield return null;
 		if (f_requireEndPanel.Count <= 0 && playButtonAmount.activeSelf && playButtonAmount.GetComponentInChildren<TMP_Text>().text == "0")
 			GameObjectManager.addComponent<NewEnd>(MainLoop.instance.gameObject, new { endType = NewEnd.NoMoreAttempt });
+	}
+
+	public void write_current_player_coins(int value)
+	{
+		string path = "Assets/Resources/current_player_coins.txt";
+		if(File.Exists(path)){
+			File.WriteAllText(path,string.Empty); // efface les dernieres valeurs enregistrée pour mettre la plus récente
+		}
+		StreamWriter writer = new StreamWriter(path, true);
+		writer.WriteLine(value.ToString());
+        writer.Close();
+		Debug.Log("Enregistrement fini de l'argent du joueur : "+value.ToString());
+	}
+
+	public int read_current_player_coins()
+	{
+		int player_coins = 0;
+		string path = "Assets/Resources/current_player_coins.txt";
+		if(File.Exists(path)){
+			// si le fichier existe, on prend la derniere valeur enregistrée
+			string[] lines = File.ReadAllLines(path);
+			player_coins =  int.Parse(lines[0]);
+		}
+		// sinon on prend le skin par défaut
+		return player_coins;
 	}
 }

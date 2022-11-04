@@ -53,8 +53,6 @@ public class LevelGenerator : FSystem {
 		Fin ajout projet
 	*/
 
-
-
 	public LevelGenerator()
 	{
 		instance = this;

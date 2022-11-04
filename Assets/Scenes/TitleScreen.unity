@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657743, g: 0.4964133, b: 0.5748175, a: 1}
+  m_IndirectSpecularColor: {r: 0.446577, g: 0.49641263, b: 0.5748162, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -8499,10 +8499,10 @@ RectTransform:
   m_Father: {fileID: 350375281}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 151.5, y: -35}
-  m_SizeDelta: {x: -751, y: 45}
+  m_AnchoredPosition: {x: -200, y: -35}
+  m_SizeDelta: {x: 200, y: 45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1176782082
 MonoBehaviour:
@@ -11371,6 +11371,8 @@ MonoBehaviour:
   robotKyle: {fileID: 0}
   pathFileParamFunct: /StreamingAssets/ParamCompFunc/FunctionConstraint.csv
   pathFileParamRequiermentLibrary: /StreamingAssets/ParamCompFunc/FunctionalityRequiermentLibrairy.xml
+  textures_available: []
+  textures_prices: 
 --- !u!114 &1645587986
 MonoBehaviour:
   m_ObjectHideFlags: 0

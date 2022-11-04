@@ -6,7 +6,7 @@ using System.IO;
 using TMPro;
 using System.Xml;
 using Object = UnityEngine.Object;
-
+using System.Collections;
 using UnityEngine.SceneManagement;
 
 /// <summary>
@@ -34,11 +34,14 @@ public class TitleScreenSystem : FSystem {
 	private bool skinActive = false;
 
 	private int current_skin_index = 0;
+	private int current_player_coins = 0;
+	private ArrayList current_skins = null;
 
 	/*
 		Ajout projet
 	*/
 	public string[] textures_available = null;
+	public int[] textures_prices = null;
 
 	Material texture = null;
 
@@ -66,6 +69,15 @@ public class TitleScreenSystem : FSystem {
 			"Robot_Color_skin2",
 			"Robot_Color_skin3"
 		};
+
+		this.textures_prices = new int[]{
+			100,
+			100,
+			100,
+			100
+		};
+
+
 		
 		// Debug.Log("y : "+this.bifules[3].ToString());
 		int value_index_skin = get_current_skin_index_from_file();
@@ -78,6 +90,11 @@ public class TitleScreenSystem : FSystem {
 
 		this.texture = (Material)Resources.Load(textures_available[value_index_skin]);
 		robotKyle.GetComponent<Renderer>().material = this.texture;
+
+		this.current_skins = get_current_skins();
+		this.current_player_coins = get_current_player_coins();
+
+
 		/*
 			Fin Ajout projet
 		*/
@@ -184,11 +201,6 @@ public class TitleScreenSystem : FSystem {
 	}
 
 	protected override void onProcess(int familiesUpdateCount) {
-
-		
-
-
-
 		if (Input.GetButtonDown("Cancel")) {
 			Application.Quit();
 		}
@@ -301,19 +313,37 @@ public class TitleScreenSystem : FSystem {
 		mainMenu.SetActive(true);
 		// TODO : Fix competence button disapear ...
 	}
-
-
 	/*
 		Ajout project function
 	*/
 	public void LogName(int skin_index){
-		this.current_skin_index = skin_index;
+		/*
+			fonction declanché lorsque l'utilisateur appui sur un skin
+		*/
+		Debug.Log(get_current_skins());
+		this.current_player_coins = get_current_player_coins();
 
-		this.texture = (Material)Resources.Load(textures_available[skin_index]);
+		if(this.textures_prices[skin_index] <= this.current_player_coins || this.current_skins.Contains(skin_index)){
+			this.current_skin_index = skin_index;
 
-		robotKyle.GetComponent<Renderer>().material = this.texture;
+			this.texture = (Material)Resources.Load(textures_available[skin_index]);
+
+			robotKyle.GetComponent<Renderer>().material = this.texture;
+			
+			if(!this.current_skins.Contains(skin_index)){
+				add_skin(skin_index);
+				achat_skin(skin_index);
+				Debug.Log("acquisition d'un nouveau skin ! "+skin_index.ToString());
+			}
+			else{
+				Debug.Log("skin deja possede, pas d'enregistrement en plus");
+			}
+			write_current_skin_index();
+		}
+		else{
+			Debug.Log("Ce skin est trop cher ! il coute "+this.textures_prices[skin_index].ToString()+", vous avez "+this.current_player_coins.ToString());
+		}
 		
-		write_current_skin_index();
 	}
 
 	public void write_current_skin_index()
@@ -326,7 +356,6 @@ public class TitleScreenSystem : FSystem {
 		writer.WriteLine(this.current_skin_index.ToString());
         writer.Close();
 		Debug.Log("Enregistrement fini du skin : "+this.current_skin_index.ToString());
-		get_current_skin_index_from_file();
 	}
 
 	public int get_current_skin_index_from_file()
@@ -341,5 +370,96 @@ public class TitleScreenSystem : FSystem {
 		// sinon on prend le skin par défaut
 		return skin_index;
 	}
+
+
+	public void write_current_player_coins()
+	{
+		string path = "Assets/Resources/current_player_coins.txt";
+		if(File.Exists(path)){
+			File.WriteAllText(path,string.Empty); // efface les dernieres valeurs enregistrée pour mettre la plus récente
+		}
+		StreamWriter writer = new StreamWriter(path, true);
+		writer.WriteLine(this.current_player_coins.ToString());
+        writer.Close();
+		Debug.Log("Enregistrement fini de l'argent du joueur : "+this.current_player_coins.ToString());
+	}
+
+
+	public int get_current_player_coins()
+	{
+		int player_coins = 0;
+		string path = "Assets/Resources/current_player_coins.txt";
+		if(File.Exists(path)){
+			// si le fichier existe, on prend la derniere valeur enregistrée
+			string[] lines = File.ReadAllLines(path);
+			player_coins =  int.Parse(lines[0]);
+		}
+		// sinon on prend le skin par défaut
+		return player_coins;
+	}
+
+	public ArrayList get_current_skins()
+	{
+		ArrayList arlist = new ArrayList(); 
+		
+		string path = "Assets/Resources/current_player_skins.txt";
+		if(File.Exists(path)){
+			// si le fichier existe, on prend la derniere valeur enregistrée
+			string[] lines = File.ReadAllLines(path);
+			string[] index_skins = lines[0].Split(',');
+			foreach(var index in index_skins){
+				arlist.Add(int.Parse(index));
+			}
+		}
+		else{
+			arlist.Add(0);
+		}
+		return arlist;
+	}
+
+
+	public void achat_skin(int index){
+		/*
+			/!\ price <= coins_player /!\
+		*/
+		int price = this.textures_prices[index];
+		int coins_player = get_current_player_coins();
+		int result = coins_player - price;
+		this.current_player_coins = result;
+		write_current_player_coins();
+	}
+
+
+	public void add_skin(int skin_value){
+		this.current_skins.Add(skin_value);
+		this.write_current_skins();
+	}
+
+	public void write_current_skins()
+	{
+		
+		//this.current_skins = get_current_skins();
+
+		string path = "Assets/Resources/current_player_skins.txt";
+		if(File.Exists(path)){
+			File.WriteAllText(path,string.Empty); // efface les dernieres valeurs enregistrée pour mettre la plus récente
+		}
+		StreamWriter writer = new StreamWriter(path, true);
+		string line = "";
+		for (int i = 0 ; i < this.current_skins.Count ; i++){
+			if(i == this.current_skins.Count-1){
+				line = line + this.current_skins[i].ToString();
+			}
+			else{
+				line = line + this.current_skins[i].ToString() + ",";
+			}
+		}
+		writer.WriteLine(line);
+        writer.Close();
+		Debug.Log("Enregistrement fini des skins du joueur: "+line);
+	}
+
+
+
 
 }

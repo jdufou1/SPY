@@ -14,6 +14,7 @@ public class TitleScreenSystem_wrapper : BaseWrapper
 	public System.String pathFileParamFunct;
 	public System.String pathFileParamRequiermentLibrary;
 	public System.String[] textures_available;
+	public System.Int32[] textures_prices;
 	private void Start()
 	{
 		this.hideFlags = HideFlags.NotEditable;
@@ -28,6 +29,7 @@ public class TitleScreenSystem_wrapper : BaseWrapper
 		MainLoop.initAppropriateSystemField (system, "pathFileParamFunct", pathFileParamFunct);
 		MainLoop.initAppropriateSystemField (system, "pathFileParamRequiermentLibrary", pathFileParamRequiermentLibrary);
 		MainLoop.initAppropriateSystemField (system, "textures_available", textures_available);
+		MainLoop.initAppropriateSystemField (system, "textures_prices", textures_prices);
 	}
 
 	public void showCampagneMenu()
@@ -68,6 +70,26 @@ public class TitleScreenSystem_wrapper : BaseWrapper
 	public void write_current_skin_index()
 	{
 		MainLoop.callAppropriateSystemMethod (system, "write_current_skin_index", null);
+	}
+
+	public void write_current_player_coins()
+	{
+		MainLoop.callAppropriateSystemMethod (system, "write_current_player_coins", null);
+	}
+
+	public void achat_skin(System.Int32 index)
+	{
+		MainLoop.callAppropriateSystemMethod (system, "achat_skin", index);
+	}
+
+	public void add_skin(System.Int32 skin_value)
+	{
+		MainLoop.callAppropriateSystemMethod (system, "add_skin", skin_value);
+	}
+
+	public void write_current_skins()
+	{
+		MainLoop.callAppropriateSystemMethod (system, "write_current_skins", null);
 	}
 
 }
