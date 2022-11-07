@@ -77,6 +77,11 @@ public class TitleScreenSystem_wrapper : BaseWrapper
 		MainLoop.callAppropriateSystemMethod (system, "write_current_player_coins", null);
 	}
 
+	public void write_current_skins()
+	{
+		MainLoop.callAppropriateSystemMethod (system, "write_current_skins", null);
+	}
+
 	public void achat_skin(System.Int32 index)
 	{
 		MainLoop.callAppropriateSystemMethod (system, "achat_skin", index);
@@ -85,11 +90,6 @@ public class TitleScreenSystem_wrapper : BaseWrapper
 	public void add_skin(System.Int32 skin_value)
 	{
 		MainLoop.callAppropriateSystemMethod (system, "add_skin", skin_value);
-	}
-
-	public void write_current_skins()
-	{
-		MainLoop.callAppropriateSystemMethod (system, "write_current_skins", null);
 	}
 
 }

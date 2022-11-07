@@ -755,15 +755,7 @@ public class LevelGenerator : FSystem {
 
 	public int get_current_skin_index_from_file()
 	{
-		int skin_index = 0;
-		string path = "Assets/Resources/current_skin_value.txt";
-		if(File.Exists(path)){
-			// si le fichier existe, on prend la derniere valeur enregistrée
-			string[] lines = File.ReadAllLines(path);
-			skin_index =  int.Parse(lines[0]);
-		}
-		// sinon on prend le skin par défaut
-		return skin_index;
+		return PlayerPrefs.GetInt("currentSkinIndex", 0);
 	}
 
 }

@@ -50,15 +50,7 @@ public class CoinSystem : FSystem {
 
 	public int read_current_player_coins()
 	{
-		int player_coins = 0;
-		string path = "Assets/Resources/current_player_coins.txt";
-		if(File.Exists(path)){
-			// si le fichier existe, on prend la derniere valeur enregistrée
-			string[] lines = File.ReadAllLines(path);
-			player_coins =  int.Parse(lines[0]);
-		}
-		// sinon on prend le skin par défaut
-		return player_coins;
+		return PlayerPrefs.GetInt("coins", 0);
 	}
 
 }
