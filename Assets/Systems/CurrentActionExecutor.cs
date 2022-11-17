@@ -5,6 +5,12 @@ using FYFY;
 /// This system executes new currentActions
 /// </summary>
 public class CurrentActionExecutor : FSystem {
+	
+	private Family f_ice = FamilyManager.getFamily(new AnyOfTags("Ice"));
+	private Family f_lava = FamilyManager.getFamily(new AnyOfTags("Lava"));
+
+
+	
 	private Family f_wall = FamilyManager.getFamily(new AllOfComponents(typeof(Position)), new AnyOfTags("Wall", "Door"), new AnyOfProperties(PropertyMatcher.PROPERTY.ACTIVE_IN_HIERARCHY));
 	private Family f_activableConsole = FamilyManager.getFamily(new AllOfComponents(typeof(Activable),typeof(Position),typeof(AudioSource)));
     private Family f_newCurrentAction = FamilyManager.getFamily(new AllOfComponents(typeof(CurrentAction), typeof(BasicAction)));
@@ -68,31 +74,44 @@ public class CurrentActionExecutor : FSystem {
 	}
 
 	private void ApplyForward(GameObject go){
+
+		bool oniceblock = onIce(go.GetComponent<Position>().x, go.GetComponent<Position>().y);
+		//bool checkobstacle = checkObstacle(go.GetComponent<Position>().x, go.GetComponent<Position>().y);
+		//Debug.Log("Check obstacle test : " + checkobstacle);
+		Debug.Log("Ice block check : " + oniceblock);
+
+		int x = go.GetComponent<Position>().x;
+		int y = go.GetComponent<Position>().y;
+
 		switch (go.GetComponent<Direction>().direction){
 			case Direction.Dir.North:
-				if(!checkObstacle(go.GetComponent<Position>().x, go.GetComponent<Position>().y - 1)){
-					go.GetComponent<Position>().x = go.GetComponent<Position>().x;
-					go.GetComponent<Position>().y = go.GetComponent<Position>().y - 1;
+				y = y - 1;
+				while(onIce(x,y) && !checkObstacle(x, y-1)){
+					y = y-1;
 				}
 				break;
 			case Direction.Dir.South:
-				if(!checkObstacle(go.GetComponent<Position>().x,go.GetComponent<Position>().y + 1)){
-					go.GetComponent<Position>().x = go.GetComponent<Position>().x;
-					go.GetComponent<Position>().y = go.GetComponent<Position>().y + 1;
+				y = y + 1;
+				while(onIce(x,y) && !checkObstacle(x, y+1)){
+					y = y+1;
 				}
 				break;
 			case Direction.Dir.East:
-				if(!checkObstacle(go.GetComponent<Position>().x + 1, go.GetComponent<Position>().y)){
-					go.GetComponent<Position>().x = go.GetComponent<Position>().x + 1;
-					go.GetComponent<Position>().y = go.GetComponent<Position>().y;
+				x = x + 1;
+				while(onIce(x,y) && !checkObstacle(x+1, y)){
+					x = x + 1;
 				}
 				break;
 			case Direction.Dir.West:
-				if(!checkObstacle(go.GetComponent<Position>().x - 1, go.GetComponent<Position>().y)){
-					go.GetComponent<Position>().x = go.GetComponent<Position>().x - 1;
-					go.GetComponent<Position>().y = go.GetComponent<Position>().y;
+				x = x - 1;
+				while(onIce(x,y) && !checkObstacle(x-1, y)){
+					x = x - 1;
 				}
 				break;
+		}
+		if(!(checkObstacle(x, y) || onLava(x, y))){
+			go.GetComponent<Position>().x = x;
+			go.GetComponent<Position>().y = y;
 		}
 	}
 
@@ -150,6 +169,29 @@ public class CurrentActionExecutor : FSystem {
 	private bool checkObstacle(int x, int z){
 		foreach( GameObject go in f_wall){
 			if(go.GetComponent<Position>().x == x && go.GetComponent<Position>().y == z)
+				return true;
+		}
+		return false;
+	}
+
+	private bool onIce(int x, int y){
+		// On ignore la glace si l'utilisateur a le skin bleu
+		if(PlayerPrefs.GetInt("currentSkinIndex", 0) == 1)
+			return false;
+		foreach( GameObject go in f_ice){
+			if(go.GetComponent<Position>().x == x && go.GetComponent<Position>().y == y)
+				return true;
+		}
+		return false;
+	}
+
+	private bool onLava(int x, int y){
+		// On ignore la lave si l'utilisateur a le skin de feu
+		if(PlayerPrefs.GetInt("currentSkinIndex", 0) == 2)
+			return false;
+
+		foreach( GameObject go in f_lava){
+			if(go.GetComponent<Position>().x == x && go.GetComponent<Position>().y == y)
 				return true;
 		}
 		return false;

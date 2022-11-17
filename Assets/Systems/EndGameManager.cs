@@ -257,32 +257,11 @@ public class EndGameManager : FSystem {
 
 	public void write_current_player_coins(int value)
 	{
-	/*
-		string path = "Assets/Resources/current_player_coins.txt";
-		if(File.Exists(path)){
-			File.WriteAllText(path,string.Empty); // efface les dernieres valeurs enregistrée pour mettre la plus récente
-		}
-		StreamWriter writer = new StreamWriter(path, true);
-		writer.WriteLine(value.ToString());
-        writer.Close();
-		Debug.Log("Enregistrement fini de l'argent du joueur : "+value.ToString());
-		*/
 		PlayerPrefs.SetInt("coins", value);
 	}
 
 	public int read_current_player_coins()
 	{
-		/*
-		int player_coins = 0;
-		string path = "Assets/Resources/current_player_coins.txt";
-		if(File.Exists(path)){
-			// si le fichier existe, on prend la derniere valeur enregistrée
-			string[] lines = File.ReadAllLines(path);
-			player_coins =  int.Parse(lines[0]);
-		}
-		// sinon on prend le skin par défaut
-		return player_coins;*/
-
 		return PlayerPrefs.GetInt("coins", 0);
 	}
 }

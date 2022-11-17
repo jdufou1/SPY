@@ -55,7 +55,7 @@ public class TitleScreenSystem : FSystem {
 		/*
 			Ajout Projet
 		*/
-		// PlayerPrefs.DeleteAll(); // Clear all data
+		//PlayerPrefs.DeleteAll(); // Clear all data
 
 
 		skinMenu = GameObject.Find("SkinMenu");
@@ -74,9 +74,9 @@ public class TitleScreenSystem : FSystem {
 
 		this.textures_prices = new int[]{
 			0,
-			10,
-			10,
-			10
+			100,
+			100,
+			100
 		};
 
 		int value_index_skin = get_current_skin_index_from_file();

@@ -162,6 +162,12 @@ public class LevelGenerator : FSystem {
 					createDoor(int.Parse(child.Attributes.GetNamedItem("posX").Value), int.Parse(child.Attributes.GetNamedItem("posY").Value),
 					(Direction.Dir)int.Parse(child.Attributes.GetNamedItem("direction").Value), int.Parse(child.Attributes.GetNamedItem("slotId").Value));
 					break;
+				case "ice":
+					createIce(int.Parse(child.Attributes.GetNamedItem("posX").Value), int.Parse(child.Attributes.GetNamedItem("posY").Value));
+					break;
+				case "lava":
+					createLava(int.Parse(child.Attributes.GetNamedItem("posX").Value), int.Parse(child.Attributes.GetNamedItem("posY").Value));
+					break;
 				case "player":
 				case "enemy":
 					string nameAgentByUser = "";
@@ -348,6 +354,30 @@ public class LevelGenerator : FSystem {
 		GameObjectManager.bind(door);
 	}
 
+	private void createLava(int gridX, int gridY){
+		GameObject lava = Object.Instantiate<GameObject>(Resources.Load ("Prefabs/LavaPlate") as GameObject, gameData.Level.transform.position + new Vector3(gridY*3,3,gridX*3), Quaternion.Euler(0,0,0), gameData.Level.transform);
+		
+		lava.GetComponentInChildren<Position>().x = gridX;
+		lava.GetComponentInChildren<Position>().y = gridY;
+
+		//lava.GetComponentInChildren<ActivationSlot>().slotID = 0;
+		//lava.GetComponentInChildren<Direction>().direction = 0;
+
+		GameObjectManager.bind(lava);
+	}
+
+	private void createIce(int gridX, int gridY){
+		GameObject ice = Object.Instantiate<GameObject>(Resources.Load ("Prefabs/IcePlate") as GameObject, gameData.Level.transform.position + new Vector3(gridY*3,3,gridX*3), Quaternion.Euler(0,0,0), gameData.Level.transform);
+
+		ice.GetComponentInChildren<Position>().x = gridX;
+		ice.GetComponentInChildren<Position>().y = gridY;
+
+		//ice.GetComponentInChildren<ActivationSlot>().slotID = 0;
+		//ice.GetComponentInChildren<Direction>().direction = 0;
+
+		GameObjectManager.bind(ice);
+	}
+
 	private void createDecoration(string name, int gridX, int gridY, Direction.Dir orientation)
 	{
 		GameObject decoration = Object.Instantiate<GameObject>(Resources.Load("Prefabs/"+name) as GameObject, gameData.Level.transform.position + new Vector3(gridY * 3, 3, gridX * 3), Quaternion.Euler(0, 0, 0), gameData.Level.transform);
@@ -395,8 +425,9 @@ public class LevelGenerator : FSystem {
 		GameObjectManager.bind(coin);
 	}
 
-	private void createCell(int gridX, int gridY){
-		GameObject cell = Object.Instantiate<GameObject>(Resources.Load ("Prefabs/Cell") as GameObject, gameData.Level.transform.position + new Vector3(gridY*3,0,gridX*3), Quaternion.Euler(0,0,0), gameData.Level.transform);
+	private void createCell(int gridX, int gridY, bool lava=false, bool ice=false){
+		GameObject cell = null;
+		cell = Object.Instantiate<GameObject>(Resources.Load ("Prefabs/Cell") as GameObject, gameData.Level.transform.position + new Vector3(gridY*3,0,gridX*3), Quaternion.Euler(0,0,0), gameData.Level.transform);
 		GameObjectManager.bind(cell);
 	}
 
@@ -458,8 +489,8 @@ public class LevelGenerator : FSystem {
 		foreach (XmlNode limitNode in limitsNode.ChildNodes)
 		{
 			actionName = limitNode.Attributes.GetNamedItem("blockType").Value;
-			// check if a GameObject exists with the same name
 			if (getLibraryItemByName(actionName) && !gameData.actionBlockLimit.ContainsKey(actionName)){
+				// check if a GameObject exists with the same name
 				gameData.actionBlockLimit[actionName] = int.Parse(limitNode.Attributes.GetNamedItem("limit").Value);
 			}
 		}

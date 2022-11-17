@@ -15,6 +15,8 @@ TagManager:
   - Door
   - ResetButton
   - RemoveButton
+  - Ice
+  - Lava
   layers:
   - Default
   - TransparentFX
