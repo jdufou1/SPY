@@ -54,14 +54,34 @@ public class MoveSystem : FSystem {
 				go.transform.localPosition = Vector3.MoveTowards(go.transform.localPosition, new Vector3(go.GetComponent<Position>().y * 3, go.transform.localPosition.y, go.GetComponent<Position>().x * 3), moveSpeed * gameData.gameSpeed_current * Time.deltaTime);
 				if (go.GetComponent<Animator>() && go.tag == "Player")
 				{
-					if (gameData.gameSpeed_current == gameData.gameSpeed_default)
+					if(PlayerPrefs.GetInt("lava",0) == 1)
 					{
-						go.GetComponent<Animator>().SetFloat("Walk", 1f);
+						//Debug.Log("Oh la glissadeeeee !");
+						go.GetComponent<Animator>().SetFloat("Walk", -1f);
 						go.GetComponent<Animator>().SetFloat("Run", -1f);
+						go.GetComponent<Animator>().SetFloat("Slide", -1f);
+						go.GetComponent<Animator>().SetFloat("Burn", 1f);
+					}
+					else if(PlayerPrefs.GetInt("ice",0) == 1)
+					{
+						//Debug.Log("Oh la glissadeeeee !");
+						go.GetComponent<Animator>().SetFloat("Walk", -1f);
+						go.GetComponent<Animator>().SetFloat("Run", -1f);
+						go.GetComponent<Animator>().SetFloat("Burn", -1f);
+						go.GetComponent<Animator>().SetFloat("Slide", 1f);
+					}
+					else if (gameData.gameSpeed_current == gameData.gameSpeed_default)
+					{
+						go.GetComponent<Animator>().SetFloat("Run", -1f);
+						go.GetComponent<Animator>().SetFloat("Slide", -1f);
+						go.GetComponent<Animator>().SetFloat("Burn", -1f);
+						go.GetComponent<Animator>().SetFloat("Walk", 1f);
 					}
 					else
 					{
 						go.GetComponent<Animator>().SetFloat("Walk", -1f);
+						go.GetComponent<Animator>().SetFloat("Slide", -1f);
+						go.GetComponent<Animator>().SetFloat("Burn", -1f);
 						go.GetComponent<Animator>().SetFloat("Run", 1f);
 					}
 				}
@@ -72,6 +92,8 @@ public class MoveSystem : FSystem {
 				{
 					go.GetComponent<Animator>().SetFloat("Walk", -1f);
 					go.GetComponent<Animator>().SetFloat("Run", -1f);
+					go.GetComponent<Animator>().SetFloat("Slide", -1f);
+					go.GetComponent<Animator>().SetFloat("Burn", -1f);
 				}
 			}
 

@@ -87,7 +87,8 @@ public class TitleScreenSystem : FSystem {
 		this.current_skins = get_current_skins();
 		this.current_player_coins = get_current_player_coins();
 
-
+		PlayerPrefs.SetInt("ice",0);
+		PlayerPrefs.SetInt("lava",0);
 		/*
 			Fin Ajout projet
 		*/
@@ -313,7 +314,7 @@ public class TitleScreenSystem : FSystem {
 			write_current_skin_index();
 		}
 		else{
-			Debug.Log("Ce skin est trop cher ! il coute "+this.textures_prices[skin_index].ToString()+", vous avez "+this.current_player_coins.ToString());
+			//Debug.Log("Ce skin est trop cher ! il coute "+this.textures_prices[skin_index].ToString()+", vous avez "+this.current_player_coins.ToString());
 		}
 		
 	}
@@ -329,14 +330,14 @@ public class TitleScreenSystem : FSystem {
 		// sinon on prend le skin par défaut
 		int skin_index = PlayerPrefs.GetInt("currentSkinIndex", 0);
 		PlayerPrefs.Save();
-		Debug.Log("current skin index : " + skin_index);
+		//Debug.Log("current skin index : " + skin_index);
 		return skin_index;
 	}
 
 
 	public void write_current_player_coins()
 	{
-		Debug.Log("Enregistrement fini de l'argent du joueur : "+this.current_player_coins.ToString());
+		//Debug.Log("Enregistrement fini de l'argent du joueur : "+this.current_player_coins.ToString());
 		PlayerPrefs.SetInt("coins", this.current_player_coins);
 		PlayerPrefs.Save();
 	}
@@ -346,7 +347,7 @@ public class TitleScreenSystem : FSystem {
 	{
 		int player_coins = PlayerPrefs.GetInt("coins", 0);
 		PlayerPrefs.Save();
-		Debug.Log("Load coins : " + player_coins);
+		//Debug.Log("Load coins : " + player_coins);
 		return player_coins;
 	}
 
@@ -355,7 +356,7 @@ public class TitleScreenSystem : FSystem {
 		ArrayList arlist = new ArrayList(); 
 		string check = PlayerPrefs.GetString("currentSkins", "0");
 		PlayerPrefs.Save();
-		Debug.Log("available skins : " + check);
+		//Debug.Log("available skins : " + check);
 		foreach(var i in check.Split(',')){
 			arlist.Add(int.Parse(i));
 		}
@@ -378,7 +379,7 @@ public class TitleScreenSystem : FSystem {
 		//Debug.Log("Enregistrement fini des skins du joueur: "+line);
 		PlayerPrefs.SetString("currentSkins", line);
 		PlayerPrefs.Save();
-		Debug.Log("save skins : " + line);
+		//Debug.Log("save skins : " + line);
 
 	}
 

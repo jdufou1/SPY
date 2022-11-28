@@ -191,6 +191,19 @@ public class EndGameManager : FSystem {
 			endPanel.GetComponent<AudioSource>().loop = true;
 			endPanel.GetComponent<AudioSource>().Play();
 		}
+		else if (f_requireEndPanel.First().GetComponent<NewEnd>().endType == NewEnd.Lava)
+		{
+			Transform verticalCanvas = endPanel.transform.Find("VerticalCanvas");
+			GameObjectManager.setGameObjectState(verticalCanvas.Find("ScoreCanvas").gameObject, false);
+			verticalCanvas.GetComponentInChildren<TextMeshProUGUI>().text = "Aïe aïe aïe je crois que tu viens d'avoir un coup de chaud \nEssaye de changer de changer des skin ;) !";
+			GameObjectManager.setGameObjectState(endPanel.transform.Find("ReloadLevel").gameObject, true);
+			GameObjectManager.setGameObjectState(endPanel.transform.Find("ReloadState").gameObject, true);
+			GameObjectManager.setGameObjectState(endPanel.transform.Find("MainMenu").gameObject, true);
+			GameObjectManager.setGameObjectState(endPanel.transform.Find("NextLevel").gameObject, false);
+			endPanel.GetComponent<AudioSource>().clip = Resources.Load("Sound/LoseSound") as AudioClip;
+			endPanel.GetComponent<AudioSource>().loop = true;
+			endPanel.GetComponent<AudioSource>().Play();
+		}
 	}
 
 	// Gére le nombre d'étoile à afficher selon le score obtenue
@@ -229,7 +242,7 @@ public class EndGameManager : FSystem {
 		if (savedScore < scoredStars)
 		{
 			int new_coins = read_current_player_coins() + (scoredStars - savedScore)*10;
-			Debug.Log("New coins : " + new_coins + " / Old coins :" + read_current_player_coins());
+			//Debug.Log("New coins : " + new_coins + " / Old coins :" + read_current_player_coins());
 			PlayerPrefs.SetInt("coins", new_coins);
 			PlayerPrefs.SetInt(gameData.levelToLoad.Item1 + Path.DirectorySeparatorChar + gameData.levelToLoad.Item2 + gameData.scoreKey, scoredStars);
 			PlayerPrefs.Save();

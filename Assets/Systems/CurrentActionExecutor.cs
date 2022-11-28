@@ -16,6 +16,8 @@ public class CurrentActionExecutor : FSystem {
     private Family f_newCurrentAction = FamilyManager.getFamily(new AllOfComponents(typeof(CurrentAction), typeof(BasicAction)));
 	private Family f_player = FamilyManager.getFamily(new AllOfComponents(typeof(ScriptRef)), new AnyOfTags("Player"));
 
+	private bool check_turn = false;
+
 	protected override void onStart()
 	{
 		f_newCurrentAction.addEntryCallback(onNewCurrentAction);
@@ -69,16 +71,18 @@ public class CurrentActionExecutor : FSystem {
 				break;
 		}
 		// notify agent moving
-		if (ca.agent.CompareTag("Drone") && !ca.agent.GetComponent<Moved>())
-			GameObjectManager.addComponent<Moved>(ca.agent);
+		//if (ca.agent.CompareTag("") && !ca.agent.GetComponent<Moved>())
+		//	GameObjectManager.addComponent<Moved>(ca.agent);
 	}
 
 	private void ApplyForward(GameObject go){
 
-		bool oniceblock = onIce(go.GetComponent<Position>().x, go.GetComponent<Position>().y);
-		//bool checkobstacle = checkObstacle(go.GetComponent<Position>().x, go.GetComponent<Position>().y);
-		//Debug.Log("Check obstacle test : " + checkobstacle);
-		Debug.Log("Ice block check : " + oniceblock);
+		// bool oniceblock = onIce(go.GetComponent<Position>().x, go.GetComponent<Position>().y);
+		// bool checkobstacle = checkObstacle(go.GetComponent<Position>().x, go.GetComponent<Position>().y);
+		// Debug.Log("Check obstacle test : " + checkobstacle);
+		// Debug.Log("Ice block check : " + oniceblock);
+
+		check_turn = false;
 
 		int x = go.GetComponent<Position>().x;
 		int y = go.GetComponent<Position>().y;
@@ -112,6 +116,11 @@ public class CurrentActionExecutor : FSystem {
 		if(!(checkObstacle(x, y) || onLava(x, y))){
 			go.GetComponent<Position>().x = x;
 			go.GetComponent<Position>().y = y;
+		}
+		else if(onLava(x, y)){
+			go.GetComponent<Position>().x = x;
+			go.GetComponent<Position>().y = y;
+			GameObjectManager.addComponent<NewEnd>(MainLoop.instance.gameObject, new { endType = NewEnd.Lava });
 		}
 	}
 
@@ -179,9 +188,14 @@ public class CurrentActionExecutor : FSystem {
 		if(PlayerPrefs.GetInt("currentSkinIndex", 0) == 1)
 			return false;
 		foreach( GameObject go in f_ice){
-			if(go.GetComponent<Position>().x == x && go.GetComponent<Position>().y == y)
+			if(go.GetComponent<Position>().x == x && go.GetComponent<Position>().y == y){
+				PlayerPrefs.SetInt("ice",1);
+				check_turn = true;
 				return true;
+			}
 		}
+		if(check_turn == false)
+			PlayerPrefs.SetInt("ice",0);
 		return false;
 	}
 
@@ -191,9 +205,14 @@ public class CurrentActionExecutor : FSystem {
 			return false;
 
 		foreach( GameObject go in f_lava){
-			if(go.GetComponent<Position>().x == x && go.GetComponent<Position>().y == y)
+			if(go.GetComponent<Position>().x == x && go.GetComponent<Position>().y == y){
+				PlayerPrefs.SetInt("lava",1);
+				check_turn = true;
 				return true;
+			}
 		}
+		if(check_turn == false)
+			PlayerPrefs.SetInt("lava",0);
 		return false;
 	}
 }
