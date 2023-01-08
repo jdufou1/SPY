@@ -1,0 +1,47 @@
+<?xml version='1.0'?>
+<level>
+ <map>
+     <line> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='1'/>  </line>
+     <line> <cell value='1'/> <cell value='0'/> <cell value='0'/> <cell value='0'/> <cell value='0'/> <cell value='0'/> <cell value='0'/> <cell value='0'/>  </line>
+     <line> <cell value='1'/> <cell value='0'/> <cell value='1'/> <cell value='3'/> <cell value='1'/> <cell value='0'/> <cell value='0'/> <cell value='0'/>  </line>
+     <line> <cell value='1'/> <cell value='0'/> <cell value='1'/> <cell value='0'/> <cell value='0'/> <cell value='0'/> <cell value='0'/> <cell value='0'/>  </line>
+     <line> <cell value='1'/> <cell value='0'/> <cell value='0'/> <cell value='0'/> <cell value='0'/> <cell value='0'/> <cell value='0'/> <cell value='1'/>  </line>
+     <line> <cell value='1'/> <cell value='0'/> <cell value='0'/> <cell value='0'/> <cell value='0'/> <cell value='0'/> <cell value='1'/> <cell value='0'/>  </line>
+     <line> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='0'/> <cell value='2'/> <cell value='1'/> <cell value='0'/>  </line>
+     <line> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='1'/>  </line>
+ </map>
+ <dialogs>
+     <dialog text="[Version test] : niveau de test" />
+ </dialogs>
+ <blockLimits>
+     <blockLimit blockType="Forward" limit="-1" />
+     <blockLimit blockType="TurnLeft" limit="10" />
+     <blockLimit blockType="TurnRight" limit="10" />
+     <blockLimit blockType="Wait" limit="0" />
+     <blockLimit blockType="Activate" limit="-1" />
+     <blockLimit blockType="TurnBack" limit="0" />
+     <blockLimit blockType="If" limit="0" />
+     <blockLimit blockType="IfElse" limit="0" />
+     <blockLimit blockType="For" limit="0" />
+     <blockLimit blockType="While" limit="0" />
+     <blockLimit blockType="Forever" limit="0" />
+     <blockLimit blockType="AndOperator" limit="0" />
+     <blockLimit blockType="OrOperator" limit="0" />
+     <blockLimit blockType="NotOperator" limit="0" />
+     <blockLimit blockType="Wall" limit="0" />
+     <blockLimit blockType="Enemy" limit="0" />
+     <blockLimit blockType="RedArea" limit="0" />
+     <blockLimit blockType="FieldGate" limit="0" />
+     <blockLimit blockType="Terminal" limit="0" />
+     <blockLimit blockType="Exit" limit="0" />
+ </blockLimits>
+ <lava posY='1' posX='7' />
+ <lava posY='3' posX='3' />
+ <lava posY='3' posX='4' />
+ <door posY="5" posX="3" direction="2" slotId="0" />
+ <lava posY='5' posX='7' />
+ <lava posY='6' posX='7' />
+ <player associatedScriptName="Karl" posY="6" posX="5" direction="0" />
+ <script name="Karl" editMode="0"/>
+ <score twoStars="0" threeStars="0"/>
+</level>

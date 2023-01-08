@@ -1,0 +1,65 @@
+<?xml version='1.0'?>
+<level>
+ <map>
+     <line> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='1'/> </line>
+     <line> <cell value='1'/> <cell value='0'/> <cell value='0'/> <cell value='0'/> <cell value='0'/> <cell value='0'/> <cell value='0'/> <cell value='3'/> <cell value='1'/> </line>
+     <line> <cell value='1'/> <cell value='1'/> <cell value='0'/> <cell value='0'/> <cell value='0'/> <cell value='1'/> <cell value='0'/> <cell value='0'/> <cell value='1'/> </line>
+     <line> <cell value='1'/> <cell value='0'/> <cell value='0'/> <cell value='0'/> <cell value='0'/> <cell value='0'/> <cell value='0'/> <cell value='0'/> <cell value='1'/> </line>
+     <line> <cell value='1'/> <cell value='1'/> <cell value='0'/> <cell value='0'/> <cell value='0'/> <cell value='1'/> <cell value='1'/> <cell value='0'/> <cell value='1'/> </line>
+     <line> <cell value='1'/> <cell value='0'/> <cell value='0'/> <cell value='0'/> <cell value='0'/> <cell value='0'/> <cell value='0'/> <cell value='0'/> <cell value='1'/> </line>
+     <line> <cell value='1'/> <cell value='0'/> <cell value='0'/> <cell value='0'/> <cell value='0'/> <cell value='0'/> <cell value='0'/> <cell value='0'/> <cell value='1'/> </line>
+     <line> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='2'/> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='1'/> </line>
+ </map>
+ <dialogs>
+     <dialog text="[Version test] : niveau de test" />
+ </dialogs>
+ <blockLimits>
+     <blockLimit blockType="Forward" limit="-1" />
+     <blockLimit blockType="TurnLeft" limit="10" />
+     <blockLimit blockType="TurnRight" limit="10" />
+     <blockLimit blockType="Wait" limit="-1" />
+     <blockLimit blockType="Activate" limit="-1" />
+     <blockLimit blockType="TurnBack" limit="0" />
+     <blockLimit blockType="If" limit="0" />
+     <blockLimit blockType="IfElse" limit="0" />
+     <blockLimit blockType="For" limit="0" />
+     <blockLimit blockType="While" limit="0" />
+     <blockLimit blockType="Forever" limit="0" />
+     <blockLimit blockType="AndOperator" limit="0" />
+     <blockLimit blockType="OrOperator" limit="0" />
+     <blockLimit blockType="NotOperator" limit="0" />
+     <blockLimit blockType="Wall" limit="0" />
+     <blockLimit blockType="Enemy" limit="0" />
+     <blockLimit blockType="RedArea" limit="0" />
+     <blockLimit blockType="FieldGate" limit="0" />
+     <blockLimit blockType="Terminal" limit="0" />
+     <blockLimit blockType="Exit" limit="0" />
+ </blockLimits>
+ <ice posY='1' posX='6' />
+ <ice posY='2' posX='2' />
+ <ice posY='2' posX='6' />
+ <door posY="2" posX="7" direction="2" slotId="0" />
+ <console state="1" posY="3" posX="1" direction="0">
+     <slot slotId="0" />
+ </console>
+ <ice posY='3' posX='2' />
+ <ice posY='3' posX='3' />
+ <ice posY='3' posX='4' />
+ <ice posY='4' posX='2' />
+ <ice posY='4' posX='3' />
+ <ice posY='4' posX='4' />
+ <ice posY='4' posX='7' />
+ <ice posY='5' posX='1' />
+ <ice posY='5' posX='2' />
+ <ice posY='5' posX='3' />
+ <ice posY='5' posX='4' />
+ <ice posY='5' posX='5' />
+ <ice posY='5' posX='6' />
+ <ice posY='6' posX='2' />
+ <ice posY='6' posX='4' />
+ <ice posY='6' posX='7' />
+ <player associatedScriptName="Karl" posY="7" posX="4" direction="0" />
+ <script name="Karl" editMode="0"/>
+ <enemy associatedScriptName="Guarde" posY="3" posX="3" direction="1" range="2" selfRange="False" typeRange="0" />
+ <score twoStars="0" threeStars="0"/>
+</level>
