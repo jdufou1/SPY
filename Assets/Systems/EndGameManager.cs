@@ -113,7 +113,7 @@ public class EndGameManager : FSystem {
             verb = "unlocked",
             objectType = "progress",
 			activityExtensions = new Dictionary<string, string>() {
-                {"Money", read_current_player_coins().ToString()}
+                {"progress", read_current_player_coins().ToString()}
             }
         });
 
