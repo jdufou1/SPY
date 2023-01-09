@@ -10,6 +10,7 @@ public class LevelGenerator_wrapper : BaseWrapper
 	public TMPro.TMP_Text levelName;
 	public UnityEngine.GameObject canvas;
 	public UnityEngine.GameObject buttonExecute;
+	public System.String[] textures_available;
 	private void Start()
 	{
 		this.hideFlags = HideFlags.NotEditable;
@@ -20,6 +21,7 @@ public class LevelGenerator_wrapper : BaseWrapper
 		MainLoop.initAppropriateSystemField (system, "levelName", levelName);
 		MainLoop.initAppropriateSystemField (system, "canvas", canvas);
 		MainLoop.initAppropriateSystemField (system, "buttonExecute", buttonExecute);
+		MainLoop.initAppropriateSystemField (system, "textures_available", textures_available);
 	}
 
 }

@@ -17,4 +17,9 @@ public class EndGameManager_wrapper : BaseWrapper
 		MainLoop.callAppropriateSystemMethod (system, "cancelEnd", null);
 	}
 
+	public void write_current_player_coins(System.Int32 value)
+	{
+		MainLoop.callAppropriateSystemMethod (system, "write_current_player_coins", value);
+	}
+
 }

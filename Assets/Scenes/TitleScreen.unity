@@ -3179,6 +3179,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1645587992}
+        m_TargetAssemblyTypeName: SendStatements_wrapper, Assembly-CSharp
+        m_MethodName: selectSkinSendStatement
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &298836973
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4423,6 +4435,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1645587985}
         m_TargetAssemblyTypeName: TitleScreenSystem_wrapper, Assembly-CSharp
         m_MethodName: LogName
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1645587992}
+        m_TargetAssemblyTypeName: SendStatements_wrapper, Assembly-CSharp
+        m_MethodName: selectSkinSendStatement
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9819,6 +9843,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1645587992}
+        m_TargetAssemblyTypeName: SendStatements_wrapper, Assembly-CSharp
+        m_MethodName: selectSkinSendStatement
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1492859000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11341,6 +11377,7 @@ GameObject:
   - component: {fileID: 1645587989}
   - component: {fileID: 1645587990}
   - component: {fileID: 1645587991}
+  - component: {fileID: 1645587992}
   m_Layer: 0
   m_Name: Main_Loop
   m_TagString: Untagged
@@ -11415,6 +11452,10 @@ MonoBehaviour:
       PublicKeyToken=null
     _typeFullName: CoinSystem
     _pause: 0
+  - _typeAssemblyQualifiedName: SendStatements, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    _typeFullName: SendStatements
+    _pause: 0
   _lateUpdateSystemDescriptions: []
   _forceUpdateInspector: 0
   _loadingState: 0
@@ -11484,6 +11525,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dab4df2d4eaa94643973dd20f83de4b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1645587992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1645587984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccf3686dd17cb704eb29d8031c2b47af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1649896675
@@ -12096,6 +12149,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1645587985}
         m_TargetAssemblyTypeName: TitleScreenSystem_wrapper, Assembly-CSharp
         m_MethodName: LogName
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1645587992}
+        m_TargetAssemblyTypeName: SendStatements_wrapper, Assembly-CSharp
+        m_MethodName: selectSkinSendStatement
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

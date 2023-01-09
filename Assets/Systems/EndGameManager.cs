@@ -2,7 +2,10 @@
 using FYFY;
 using System.Collections;
 using TMPro;
+using System;
 using System.IO;
+using DIG.GBLXAPI;
+using System.Collections.Generic;
 
 /// <summary>
 /// This system check if the end of the level is reached and display end panel accordingly
@@ -103,6 +106,17 @@ public class EndGameManager : FSystem {
 	// Display panel with appropriate content depending on end
 	private void displayEndPanel(GameObject unused)
 	{
+		
+		Debug.Log("SEND MONEY");
+		GameObjectManager.addComponent<ActionPerformedForLRS>(MainLoop.instance.gameObject, new
+        {
+            verb = "unlocked",
+            objectType = "progress",
+			activityExtensions = new Dictionary<string, string>() {
+                {"Money", read_current_player_coins().ToString()}
+            }
+        });
+
 		// display end panel (we need immediate enabling)
 		endPanel.transform.parent.gameObject.SetActive(true);
 		// Get the first end that occurs
